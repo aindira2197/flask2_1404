@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To'lovlar</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        .paid {
+            color: green;
+            font-weight: bold;
+        }
+        .pending {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">To'lovlar jadvali</h2>
+
+<table>
+    <tr>
+        <th>Mijoz</th>
+        <th>Summa</th>
+        <th>To'lov usuli</th>
+        <th>Holat</th>
+    </tr>
+
+    {% for p in payments %}
+    <tr>
+        <td>{{ p.client }}</td>
+        <td>{{ p.amount }}</td>
+        <td>{{ p.method }}</td>
+        <td class="{{ 'paid' if p.paid else 'pending' }}">
+            {{ "To'langan" if p.paid else "Kutilmoqda" }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3 style="text-align:center;">
+    Jami to‘langan: {{ total_paid }} so‘m
+</h3>
+
+<h3 style="text-align:center;">
+    Jami qarzdorlik: {{ total_debt }} so‘m
+</h3>
+
+</body>
+</html>
